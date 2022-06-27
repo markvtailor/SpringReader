@@ -1,0 +1,21 @@
+server:
+  port: 8080
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+      url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/springshelf}
+      username: postgres
+      password: password
+  servlet:
+      multipart:
+       max-file-size: 1024MB
+       max-request-size: 1024MB
+  aws:
+    accessKeyId: 123
+    secretAccessKey: xyz
