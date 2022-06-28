@@ -8,5 +8,5 @@ import java.util.Set;
 
 public interface BookRepository extends CrudRepository<BookEntity,Long> {
     @Transactional
-    Set<BookEntity> findByShelfId(long shelfId);
+    Set<BookEntity> findByUserOwnerAndNameContains(String userOwner, String name);
 }

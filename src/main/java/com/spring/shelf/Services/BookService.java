@@ -15,18 +15,19 @@ public class BookService {
     ShelfService shelfService;
 
 
-    public BookEntity uploading(String name, String author, String description, String owner, long shelfId){
+    public BookEntity uploading(String name, String author, String description, String owner, String shelfName){
         BookEntity book = new BookEntity();
         book.setName(name);
         book.setAuthor(author);
         book.setDescription(description);
         book.setUserOwner(owner);
-        book.setShelf(shelfService.getShelf(owner,shelfId));
+        book.setInternalName(owner+"_"+name);
+        book.setShelf(shelfService.getShelf(owner,shelfName));
         return bookRepository.save(book);
     }
 
-    public Set<BookEntity> getBooks(long id){
-        return bookRepository.findByShelfId(id);
+    public Set<BookEntity> getBook(String username, String name){
+        return bookRepository.findByUserOwnerAndNameContains(username, name);
     }
 
 }

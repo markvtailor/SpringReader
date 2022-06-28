@@ -4,19 +4,25 @@ import com.spring.shelf.Entities.ShelfEntity;
 import com.spring.shelf.Repositories.ShelfRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Set;
 
 @Service
 public class ShelfService {
     @Autowired
     ShelfRepository shelfRepository;
 
-    public ShelfEntity createShelf(String username,String name){
+    public void createShelf(String username, String name){
         ShelfEntity shelf = new ShelfEntity(username, name);
-        return shelfRepository.save(shelf);
+        shelfRepository.save(shelf);
     }
 
-    public ShelfEntity getShelf(String username, long id){
-        return shelfRepository.findByUserAndId(username, id);
+    public Set<ShelfEntity> findShelves(String username, String shelfName){
+        return shelfRepository.findByUserAndShelfNameContains(username, shelfName );
     }
+
+    public ShelfEntity getShelf(String username, String shelfName){
+        return shelfRepository.findByUserAndShelfName(username, shelfName);
+    }
+
 }

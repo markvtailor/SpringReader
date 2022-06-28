@@ -25,9 +25,9 @@ public class ShelfController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity getShelf(@RequestParam String username, @RequestParam long id){
+    public ResponseEntity findShelves(@RequestParam String username, @RequestParam String shelfName){
         try {
-            return ResponseEntity.ok(shelfService.getShelf(username, id));
+            return ResponseEntity.ok(shelfService.findShelves(username, shelfName));
         } catch (Exception e){
             return ResponseEntity.badRequest().body("Не удалось загрузить полку" + e.getMessage());
         }

@@ -16,7 +16,7 @@ public class BookEntity {
     @Column(name = "id",updatable = false,nullable = false, unique = true)
     private long id;
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "author",nullable = false)
@@ -26,7 +26,10 @@ public class BookEntity {
     private String description;
 
     @Column(name = "owner", nullable = false)
-    private String UserOwner;
+    private String userOwner;
+
+    @Column(name = "internalName",unique = true,nullable = false)
+    private String internalName;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonIgnore

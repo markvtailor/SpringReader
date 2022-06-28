@@ -15,21 +15,21 @@ public class BookController {
 
 
     @PostMapping("/upload")
-    public ResponseEntity uploadBook(@RequestParam String name, @RequestParam String author, @RequestParam String description, @RequestParam String owner, @RequestParam long shelfId){
+    public ResponseEntity uploadBook(@RequestParam String name, @RequestParam String author, @RequestParam String description, @RequestParam String owner, @RequestParam String shelfName){
         try {
             System.out.println(name);
-            System.out.println(shelfId);
-            bookService.uploading(name,author,description,owner,shelfId);
-            return ResponseEntity.ok("Книга загружена!");
+            System.out.println(shelfName);
+            bookService.uploading(name,author,description,owner,shelfName);
+            return ResponseEntity.ok("Книга " + name + " загружена на полку " + shelfName);
         } catch (Exception e){
             return ResponseEntity.badRequest().body("Ошибка при загрузке: "+e.getMessage());
         }
     }
 
-    @GetMapping("/shelf/{id}")
-    public ResponseEntity getBooksFromShelf(@PathVariable long id){
+    @GetMapping("/book")
+    public ResponseEntity getBooksFromShelf(@RequestParam String username, @RequestParam String name){
         try {
-            return ResponseEntity.ok(bookService.getBooks(id));
+            return ResponseEntity.ok(bookService.getBook(username, name));
         } catch (Exception e){
             return ResponseEntity.badRequest().body("Не удалось загрузить книги с полки: " + e.getMessage());
         }

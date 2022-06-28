@@ -24,11 +24,15 @@ public class ShelfEntity {
     @Column(name = "owner", nullable = false)
     private String user;
 
+    @Column(name = "internalName",unique = true,nullable = false)
+    private String internalName;
+
     @OneToMany(mappedBy = "shelf", cascade = CascadeType.ALL)
     @Column(name = "books",nullable = false)
     private Set<BookEntity> books;
 
     public ShelfEntity(String username, String name){
+        internalName=username+"_"+name;
         user=username;
         shelfName=name;
     }
